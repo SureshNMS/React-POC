@@ -1,31 +1,28 @@
 import { useState } from 'react'
 import './App.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Header from './components/header';
+import { Home } from "./pages/home/home";
+import Login from './pages/auth/login'
+import Signup from './pages/auth/signup'
+
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-      <div className='m-0 p-0'>
-        <header className='flex items-center justify-between p-4 bg-gray-800 text-white'>
-          <h1 className='text-xl logo'>
-            <image src='/vite.svg' alt='Vite Logo' className='h-8 w-8 inline-block mr-2' />
-          </h1>
-          <nav className='flex space-x-4 items-center'>
-            <a href='#' className='text-white hover:underline'>Home</a>
-            <a href='#' className='text-white hover:underline'>Courses</a>
-            <a href='#' className='text-white hover:underline'>About</a>
-            <a href='#' className='text-white hover:underline'>Contact</a>
-            <button
-              className='px-2 py-1 bg-indigo-500 hover:bg-fuchsia-500 text-white rounded cursor-pointer'
-            >
-              Login / Sing up?
-            </button>
-          </nav>
-        </header>
-      </div>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/auth/login" element={<Login />} />
+        <Route path="/auth/signup" element={<Signup />} />
+        {/* Add more routes as needed */}
+        {/* <Route path="/courses" element={<Courses />} /> */}
+        {/* <Route path="/courses/:id" element={<CourseDetails />} /> */}
+      </Routes>
     </>
-  )
+  );
 }
 
 export default App
