@@ -10,6 +10,15 @@ function Signup() {
                 <p className="text-xs mb-6 text-center">Create an account to get started.</p>
                 <form>
                     <div className="mb-4">
+                        <label className="block text-sm font-medium mb-2" htmlFor="sName">Name</label>
+                        <input
+                            type="text"
+                            id="sName"
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            placeholder="Enter your name"
+                        />
+                    </div>
+                    <div className="mb-4">
                         <label className="block text-sm font-medium mb-2" htmlFor="sEmail">Email</label>
                         <input
                             type="email"

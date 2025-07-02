@@ -13,7 +13,7 @@ function LoginButton() {
       </Link>
       <button
         onClick={() => navigate("/auth/login")}
-        className="px-3 py-1 bg-[#FF9500] text-white rounded cursor-pointer"
+        className="px-3 py-1 bg-[#FF9500] hover:bg-orange-600 text-white rounded cursor-pointer"
       >
         Login
       </button>
