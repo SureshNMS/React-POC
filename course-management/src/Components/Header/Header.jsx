@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Logo from '../assets/course-management-logo-dark.png';
-import LoginButton from "./LoginButton";
+import Logo from '../../assets/course-management-logo-dark.png';
+import LoginButton from "../AuthButtons/LoginButton";
 
 function Header() {
   return (  
