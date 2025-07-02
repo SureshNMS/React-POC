@@ -1,29 +1,33 @@
 import React from "react";
-import Courses from "../../Utils/CoursesData";
+import Courses from "../../Components/Courses/Course";
+import CourseData from "../../Utils/CoursesData";
 
-function Course({courses}) {
+function Course() {
   return (
-    <div className="bg-white rounded-xl shadow p-4 flex flex-col">
-      <img
-        src={courses.image}
-        alt="Web Design"
-        className="rounded-lg w-full h-48 object-cover"
-      />
-      <div className="flex items-center justify-between mt-4 text-sm text-gray-500">
-        <span className="mr-2">{courses.duration}</span>
-        <span className="px-2 py-1 bg-gray-100 rounded-md text-xs font-medium">
-          {courses.level}
-        </span>
-        <span className="ml-auto text-right text-xs">Category: {courses.category}</span>
+    <>
+      <section className="container px-4 py-12">
+        <div className="flex flex-wrap justify-between items-end mb-10">
+          <div className="max-w-6xl">
+            <h2 className="text-3xl font-semibold text-gray-900">
+              Our Courses
+            </h2>
+            <p className="mt-2 text-gray-600 text-base leading-relaxed">
+              Unlock your potential with our curated selection of career-ready
+              courses. Whether you're just getting started or advancing your
+              expertise, we offer practical, hands-on learning in design,
+              development, programming, and more. Explore real-world projects,
+              get guided by industry experts, and gain the skills that matter.
+            </p>
+          </div>
+        </div>
+      
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+        {CourseData.map((course) => (
+          <Courses key={course.id} courses={course} />
+        ))}
       </div>
-      <h3 className="mt-3 text-lg font-semibold text-gray-900">{courses.title}</h3>
-      <p className="text-gray-600 mt-1 text-sm grow">
-        {courses.description}
-      </p>
-      <button className="mt-4 w-full bg-gray-100 hover:bg-amber-500 text-gray-900 font-medium py-2 rounded-lg">
-        Get it Now
-      </button>
-    </div>
+      </section>
+    </>
   );
 }
 

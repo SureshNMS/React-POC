@@ -6,6 +6,7 @@ import Footer from './Components/Footer/Footer'
 import Home from './Pages/Home/Home'
 import Login from './Pages/Auth/Login'
 import Signup from './Pages/Auth/Signup'
+import Courses from './Pages/Course/Courses'
 
 
 function App() {
@@ -18,8 +19,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/auth/login" element={<Login />} />
         <Route path="/auth/signup" element={<Signup />} />
-        {/* Add more routes as needed */}
-        {/* <Route path="/courses" element={<Courses />} /> */}
+        <Route path="/course" element={<Courses />} />
         {/* <Route path="/courses/:id" element={<CourseDetails />} /> */}
       </Routes>
       <Footer />

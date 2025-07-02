@@ -2,7 +2,7 @@ const courses = [
   {
     id: 1,
     title: "Web Design Fundamentals",
-    image: "/courses/web-design.jpg",
+    image: "/Courses/web-design.jpg",
     instructor: "John Smith",
     duration: "4 Weeks",
     level: "Beginner",
@@ -12,7 +12,7 @@ const courses = [
   {
     id: 2,
     title: "UI/UX Design Basics",
-    image: "/courses/ui-ux.jpg",
+    image: "/Courses/ui-ux.jpg",
     instructor: "Emily Johnson",
     duration: "6 Weeks",
     level: "Intermediate",
@@ -22,7 +22,7 @@ const courses = [
   {
     id: 3,
     title: "React Native App Development",
-    image: "/courses/mobile-app.jpg",
+    image: "/Courses/mobile-app.jpg",
     instructor: "David Brown",
     duration: "8 Weeks",
     level: "Intermediate",
@@ -32,7 +32,7 @@ const courses = [
   {
     id: 4,
     title: "Graphic Design for Beginners",
-    image: "/courses/graphic-design.jpg",
+    image: "/Courses/graphic-design.jpg",
     instructor: "Sarah Thompson",
     duration: "10 Weeks",
     level: "Beginner",
@@ -42,7 +42,7 @@ const courses = [
   {
     id: 5,
     title: "Front-End Web Development",
-    image: "/courses/frontend.jpg",
+    image: "/Courses/frontend.jpg",
     instructor: "Michael Adams",
     duration: "10 Weeks",
     level: "Intermediate",
@@ -52,7 +52,7 @@ const courses = [
   {
     id: 6,
     title: "Advanced JavaScript Concepts",
-    image: "/courses/advanced-js.jpg",
+    image: "/Courses/advanced-js.jpg",
     instructor: "Jennifer Wilson",
     duration: "6 Weeks",
     level: "Advance",
@@ -62,7 +62,7 @@ const courses = [
   {
     id: 7,
     title: "Responsive Web Design",
-    image: "/courses/web-design.jpg",
+    image: "/Courses/web-design.jpg",
     instructor: "Liam Carter",
     duration: "3 Weeks",
     level: "Beginner",
@@ -72,7 +72,7 @@ const courses = [
   {
     id: 8,
     title: "UX Prototyping with Figma",
-    image: "/courses/ui-ux.jpg",
+    image: "/Courses/ui-ux.jpg",
     instructor: "Ava Robinson",
     duration: "4 Weeks",
     level: "Intermediate",
@@ -82,7 +82,7 @@ const courses = [
   {
     id: 9,
     title: "Android Development with Kotlin",
-    image: "/courses/mobile-app.jpg",
+    image: "/Courses/mobile-app.jpg",
     instructor: "Noah Patel",
     duration: "6 Weeks",
     level: "Intermediate",
@@ -92,7 +92,7 @@ const courses = [
   {
     id: 10,
     title: "Logo & Branding Design",
-    image: "/courses/graphic-design.jpg",
+    image: "/Courses/graphic-design.jpg",
     instructor: "Emma Clark",
     duration: "6 Weeks",
     level: "Beginner",
@@ -102,7 +102,7 @@ const courses = [
   {
     id: 11,
     title: "Tailwind CSS Workshop",
-    image: "/courses/frontend.jpg",
+    image: "/Courses/frontend.jpg",
     instructor: "Lucas Wright",
     duration: "4 Weeks",
     level: "Intermediate",
@@ -112,7 +112,7 @@ const courses = [
   {
     id: 12,
     title: "JavaScript DOM & Events",
-    image: "/courses/advanced-js.jpg",
+    image: "/Courses/advanced-js.jpg",
     instructor: "Mia Davis",
     duration: "5 Weeks",
     level: "Intermediate",
@@ -122,7 +122,7 @@ const courses = [
   {
     id: 13,
     title: "Typography & Visual Hierarchy",
-    image: "/courses/graphic-design.jpg",
+    image: "/Courses/graphic-design.jpg",
     instructor: "Ethan Scott",
     duration: "3 Weeks",
     level: "Beginner",
@@ -132,7 +132,7 @@ const courses = [
   {
     id: 14,
     title: "Wireframing & User Flows",
-    image: "/courses/ui-ux.jpg",
+    image: "/Courses/ui-ux.jpg",
     instructor: "Olivia Lewis",
     duration: "6 Weeks",
     level: "Intermediate",
@@ -142,7 +142,7 @@ const courses = [
   {
     id: 15,
     title: "Build a Real-Time Chat App",
-    image: "/courses/advanced-js.jpg",
+    image: "/Courses/advanced-js.jpg",
     instructor: "Henry Walker",
     duration: "7 Weeks",
     level: "Advance",

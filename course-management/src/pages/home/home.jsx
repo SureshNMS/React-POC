@@ -1,7 +1,11 @@
 import React from "react";
-import Courses from "../Course/Courses"
+import Course from "../../Components/Courses/Course"
 import CourseData from "../../Utils/CoursesData"
+import LogosData from "../../Utils/LogosData"
+import { useNavigate, Link } from "react-router-dom"
+
 function Home() {
+  const navigate = useNavigate();
   return (
     <>
       <div className="container">
@@ -39,27 +43,13 @@ function Home() {
 
         <div className="bg-white rounded-2xl p-4 shadow-sm w-fit mx-auto mt-14 container">
           <div className="flex justify-between items-center flex-wrap gap-6">
-            <div className="flex-1 text-center border-r last:border-r-0">
-              <img src="/Logos/Zapier.png" alt="Zapier" className="mx-auto" />
-            </div>
-            <div className="flex-1 text-center border-r last:border-r-0">
-              <img src="/Logos/Spotify.png" alt="Spotify" className="mx-auto" />
-            </div>
-            <div className="flex-1 text-center border-r last:border-r-0">
-              <img src="/Logos/Zoom.png" alt="Zoom" className="mx-auto" />
-            </div>
-            <div className="flex-1 text-center border-r last:border-r-0">
-              <img src="/Logos/Amazon.png" alt="Amazon" className="mx-auto" />
-            </div>
-            <div className="flex-1 text-center border-r last:border-r-0">
-              <img src="/Logos/Adobe.png" alt="Adobe" className="mx-auto" />
-            </div>
-            <div className="flex-1 text-center border-r last:border-r-0">
-              <img src="/Logos/Notion.png" alt="Notion" className="mx-auto" />
-            </div>
-            <div className="flex-1 text-center">
-              <img src="/Logos/Netflix.png" alt="Netflix" className="mx-auto" />
-            </div>
+            {
+              LogosData.map(logos => (
+                <div className="flex-1 text-center border-r last:border-r-0" key={logos.id}>
+                  <img src={logos.img} alt={logos.alt} className="mx-auto" />
+              </div>
+              ))
+            }
           </div>
         </div>
         <div className="mt-15 mx-auto max-w-4xl">
@@ -80,7 +70,7 @@ function Home() {
               </p>
             </div>
             <div className="mt-4 md:mt-0">
-              <button className="bg-white border border-gray-200 text-gray-800 font-medium px-3 py-1 text-xs rounded shadow-sm hover:bg-gray-100">
+              <button onClick={() => navigate("/Course")} className="bg-white border border-gray-200 text-gray-800 font-medium px-3 py-1 text-xs rounded shadow-sm hover:bg-gray-100">
                 View All
               </button>
             </div>
@@ -88,9 +78,9 @@ function Home() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
             {
-              CourseData.map(course =>
-                <Courses courses = {course} />
-               )
+              CourseData.slice(0, 6).map(course =>(
+                <Course key = {course.id} courses = {course} />
+              ))
             }
           </div>
         </section>

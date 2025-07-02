@@ -26,12 +26,12 @@ function Header() {
             >
               Home
             </Link>
-            <a
-              href="#"
+            <Link
+              to="Course"
               className="text-black hover:bg-[#F1F1F3] p-2 rounded-md"
             >
               Courses
-            </a>
+            </Link>
             <a
               href="#"
               className="text-black hover:bg-[#F1F1F3] p-2 rounded-md"
