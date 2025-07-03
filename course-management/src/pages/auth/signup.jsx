@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 function Signup() {
     return (
@@ -43,7 +43,7 @@ function Signup() {
                         Sign Up
                     </button>
                 </form>
-                <p className="text-xs text-center mt-3">Already have an account? <a href="#" className="text-[#FF9500]">Login</a></p>
+                <p className="text-xs text-center mt-3">Already have an account? <Link to="/auth/login" className="text-[#FF9500]">Login</Link></p>
             </div>
         </div>
     );

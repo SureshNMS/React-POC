@@ -10,8 +10,6 @@ import Courses from './Pages/Course/Courses'
 
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
       <Header />
@@ -20,6 +18,8 @@ function App() {
         <Route path="/auth/login" element={<Login />} />
         <Route path="/auth/signup" element={<Signup />} />
         <Route path="/course" element={<Courses />} />
+        {/* <Route path='/aboutus' element={<AboutUs />} /> */}
+        {/* <Route path='/contact' element={<ContactUs />} /> */}
         {/* <Route path="/courses/:id" element={<CourseDetails />} /> */}
       </Routes>
       <Footer />

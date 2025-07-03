@@ -1,7 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import Logo from '../../assets/course-management-logo-dark.png';
+import { Link, NavLink } from "react-router-dom";
+import Logo from '../../Assets/course-management-logo-dark.png';
 import LoginButton from "../AuthButtons/LoginButton";
+import NavItem from "./NavList"; 
 
 function Header() {
   return (  
@@ -20,32 +21,15 @@ function Header() {
             />
           </div>
           <nav className="flex space-x-4 items-center text-sm">
-            <Link
-              to="/"
-              className="text-black active font-semibold p-2 bg-[#F1F1F3] rounded-md"
-            >
-              Home
-            </Link>
-            <Link
-              to="Course"
-              className="text-black hover:bg-[#F1F1F3] p-2 rounded-md"
-            >
-              Courses
-            </Link>
-            <a
-              href="#"
-              className="text-black hover:bg-[#F1F1F3] p-2 rounded-md"
-            >
-              About
-            </a>
-            <a
-              href="#"
-              className="text-black hover:bg-[#F1F1F3] p-2 rounded-md"
-            >
-              Contact
-            </a>
+            <NavItem to="/" end>Home</NavItem>
+            <NavItem to="/course">Course</NavItem>
+            <NavItem to="aboutus">About us</NavItem>
+            <NavItem to="contact">Contact us</NavItem>
           </nav>
+
+          {/* Login and Signup Buttons */}
           <LoginButton />
+
         </header>
       </div>
     </div>

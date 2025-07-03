@@ -1,22 +1,40 @@
 import React from "react";
-import {useNavigate, Link} from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
-function LoginButton() {
-  const navigate = useNavigate();
+const LoginButton = () => {
+  const location = useLocation();
+  // Inline reusable NavItem component
+  function AuthButton({ to, children, defaultBg = false }) {
+    const currentPath = location.pathname;
+    const isAnyAuthLinkActive = 
+      currentPath === '/auth/signup' || currentPath === '/auth/login';
+    return(
+      <NavLink
+        to={to}
+        className={({ isActive }) =>{
+          let base = 'px-3 py-1 text-black rounded';
+          let active = "bg-[#FF9500] font-semibold text-white";
+          let hover = "hover:bg-[#E0E0E0]";
+
+          if(defaultBg) {
+            if(!isAnyAuthLinkActive) {
+              return `${base} ${active}`;
+            }
+            return `${base} ${isActive ? active : hover}`;
+          }
+
+          return `${base} ${isActive ? active : hover}`;
+        }}
+      >
+        {children}
+      </NavLink>
+    )
+  };
+
   return (
     <nav className="flex items-center space-x-4 ml-auto text-sm">
-      <Link
-        to="/auth/signup"
-        className="px-3 py-1 text-black rounded hover:bg-[#E0E0E0]"
-      >
-        Sign Up
-      </Link>
-      <button
-        onClick={() => navigate("/auth/login")}
-        className="px-3 py-1 bg-[#FF9500] hover:bg-orange-600 text-white rounded cursor-pointer"
-      >
-        Login
-      </button>
+      <AuthButton to="auth/signup">Sign Up</AuthButton>
+      <AuthButton to="auth/login" defaultBg>Login</AuthButton>
     </nav>
   );
 }
