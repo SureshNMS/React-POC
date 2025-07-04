@@ -9,6 +9,7 @@ import Signup from './Pages/Auth/Signup'
 import Courses from './Pages/Course/Courses'
 import About from './Pages/About/About'
 import Contact from './Pages/Contact/Contact'
+import CourseDetails from './Pages/Course/CourseDetails'
 
 
 function App() {
@@ -22,7 +23,7 @@ function App() {
         <Route path="/course" element={<Courses />} />
         <Route path='/aboutus' element={<About />} />
         <Route path='/contact' element={<Contact />} />
-        {/* <Route path="/courses/:id" element={<CourseDetails />} /> */}
+        <Route path="/coursedetails/:id" element={<CourseDetails />} />
       </Routes>
       <Footer />
     </>

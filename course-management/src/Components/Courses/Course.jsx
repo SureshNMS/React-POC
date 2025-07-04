@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function Course({courses}) {
+  const Navigate = useNavigate();
   return (
     <div className="bg-white rounded-xl shadow p-4 flex flex-col">
       <img
@@ -19,7 +21,7 @@ function Course({courses}) {
       <p className="text-gray-600 mt-1 text-sm grow">
         {courses.description}
       </p>
-      <button className="mt-4 w-full bg-gray-100 hover:bg-amber-500 text-gray-900 font-medium py-2 rounded-lg">
+      <button onClick={() => Navigate(`/coursedetails/${courses.id}`)} className="mt-4 w-full bg-gray-100 hover:bg-amber-500 text-gray-900 font-medium py-2 rounded-lg">
         Get it Now
       </button>
     </div>
