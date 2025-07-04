@@ -7,6 +7,8 @@ import Home from './Pages/Home/Home'
 import Login from './Pages/Auth/Login'
 import Signup from './Pages/Auth/Signup'
 import Courses from './Pages/Course/Courses'
+import About from './Pages/About/About'
+import Contact from './Pages/Contact/Contact'
 
 
 function App() {
@@ -18,8 +20,8 @@ function App() {
         <Route path="/auth/login" element={<Login />} />
         <Route path="/auth/signup" element={<Signup />} />
         <Route path="/course" element={<Courses />} />
-        {/* <Route path='/aboutus' element={<AboutUs />} /> */}
-        {/* <Route path='/contact' element={<ContactUs />} /> */}
+        <Route path='/aboutus' element={<About />} />
+        <Route path='/contact' element={<Contact />} />
         {/* <Route path="/courses/:id" element={<CourseDetails />} /> */}
       </Routes>
       <Footer />
