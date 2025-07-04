@@ -33,11 +33,8 @@ function Home() {
           </p>
         </div>
         <div className="flex gap-4 text-center mx-auto w-fit mt-6">
-          <button className="bg-[#FF9500] hover:bg-orange-600 text-white font-semibold px-4 py-2 rounded-lg shadow-md">
+          <button onClick={() => navigate('/Course')} className="bg-[#FF9500] hover:bg-orange-600 text-white font-semibold px-4 py-2 rounded-lg shadow-md">
             Explore Courses
-          </button>
-          <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold px-4 py-2 rounded-lg shadow-md border border-gray-200">
-            View Pricing
           </button>
         </div>
 
