@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {Children, useState} from "react";
 import { Link, NavLink } from "react-router-dom";
 import Logo from '../../Assets/course-management-logo-dark.png';
 import LoginButton from "../AuthButtons/LoginButton";
@@ -15,11 +15,13 @@ function Header() {
       <div className="mx-auto border-b border-[#E4E4E7]">
         <header className="flex items-center justify-between p-4 text-[#262626] container">
           <div className="flex items-center mr-12">
-            <img
-              src={Logo}
-              alt="Course Management Logo"
-              className="h-auto w-[100px] mr-3"
-            />
+            <NavLink to={"/"}>
+              <img
+                src={Logo}
+                alt="Course Management Logo"
+                className="h-auto w-[100px] mr-3"
+              />
+            </NavLink>
           </div>
           <nav className="hidden md:flex space-x-4 items-center text-sm">
             <NavItem to="/" end>Home</NavItem>
@@ -46,16 +48,13 @@ function Header() {
 
           {/* Mobile Menu */}
         {menuOpen && (
-          <div className="md:hidden flex px-5 py-2.5 absolute right-0 top-[70px] bg-[#f2f2f2] text-right gap-5 w-full z-40 justify-end items-center flex-wrap text-xs">
-            <Link to="/" className="block text-black font-medium bg-gray-100 rounded">
-              Home
-            </Link>
-            <Link to="/courses" className="block hover:text-orange-500">Course</Link>
-            <Link to="/about" className="block hover:text-orange-500">About Us</Link>
-            <Link to="/contact" className="block hover:text-orange-500">Contact Us</Link>
+          <div className="md:hidden flex px-5 py-2.5 absolute right-0 left-0 top-[134px] bg-[#f2f2f2] text-right gap-5 w-[calc(100%-1rem)] mx-auto z-40 justify-center items-center flex-wrap text-xs">
+            <NavItem to="/" end>Home</NavItem>
+            <NavItem to="/course">Course</NavItem>
+            <NavItem to="aboutus">About Us</NavItem>
+            <NavItem to="contact">Contact Us</NavItem>
           </div>
         )}
-
         </header>
       </div>
     </div>

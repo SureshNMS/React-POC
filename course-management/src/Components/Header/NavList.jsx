@@ -7,7 +7,7 @@ const NavItem = ({to, end = false, children}) => {
             to={to} 
             end={end}
             className={({isActive}) => 
-                `text-black p-2 rounded-md ${isActive ? "bg-[#ece8e6] font-semibold" : "hover:bg-[#F1F1F3]"}`
+                `text-black p-2 rounded-md ${isActive ? "md:bg-[#ece8e6] font-semibold" : "hover:bg-[#F1F1F3]"}`
             }
         >
             {children}
