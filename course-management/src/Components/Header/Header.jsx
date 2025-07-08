@@ -1,5 +1,5 @@
-import React, {Children, useState} from "react";
-import { Link, NavLink } from "react-router-dom";
+import React, {useState} from "react";
+import { NavLink } from "react-router-dom";
 import Logo from '../../Assets/course-management-logo-dark.png';
 import LoginButton from "../AuthButtons/LoginButton";
 import NavItem from "./NavList"; 

@@ -1,43 +1,151 @@
-import React from "react";
+import React, {useState} from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 function Signup() {
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [nameError, setNameError] = useState("");
+    const [emailError, setEmailError] = useState("");
+    const [passwordError, setPasswordError] = useState("");
+    const [confirmPasswordError, setConfirmPasswordError] = useState("");
+
+    const isValidName = (value) => {
+        if(!value.trim()) {
+            setNameError("Name is Required");
+            return false;
+        }
+        setNameError("");
+        return true;
+    }
+
+    const isvalidEmail = (value) => {
+        if(!value.trim()) {
+            setEmailError("Email id is required");
+            return false;
+        }
+        const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+        setEmailError(isValid ? "" : "Invalid email format");
+        return isValid;
+    }
+
+    const isValidPassword = (value) => {
+        if(!value.trim()) {
+            setPasswordError("Password is required");
+            return false;
+        }
+        setPasswordError("");
+        return true;
+    }
+
+    const isValidConfirmPassword = (value) => {
+        if(!value.trim()) {
+            setConfirmPasswordError("Confirm Password is required");
+            return false;
+        }
+        else if(value !== password){
+            setConfirmPasswordError("Password and Confirm Password not same");
+            return false;
+        }
+        setConfirmPasswordError("");
+        return true;
+    }
+
+    const handleNameChnage = (e) => {
+        const value = e.target.value;
+        setName(value);
+        setNameError("");
+    }
+
+    const handleEmailChnage = (e) => {
+        const value = e.target.value;
+        setEmail(value);
+        setEmailError("");
+    }
+
+    const handlepasswordChnage = (e) => {
+        const value = e.target.value;
+        setPassword(value);
+        setPasswordError("");
+    }
+
+    const handleConfirmPasswordChnage = (e) => {
+        const value = e.target.value;
+        setConfirmPassword(value);
+        setConfirmPasswordError("");
+    }
+
+    const handleSignup = (e) => {
+        e.preventDefault();
+
+        const nameValid = isValidName(name);
+        const emailValid = isvalidEmail(email);
+        const passwordValid = isValidPassword(password);
+        const confirmPasswordValid = isValidConfirmPassword(confirmPassword);
+
+        if(nameValid && emailValid && passwordValid && confirmPasswordValid) {
+            alert("Login Successfull !");
+        }
+    }
+
     return (
         // Signup form
         <div className="flex items-center justify-center mt-10">
             <div className="bg-white p-8 rounded-lg shadow-md w-96">
                 <h2 className="text-2xl font-bold text-center">Sign Up</h2>
                 <p className="text-xs mb-6 text-center">Create an account to get started.</p>
-                <form>
+                <form onSubmit={handleSignup}>
                     <div className="mb-4">
                         <label className="block text-sm font-medium mb-2" htmlFor="sName">Name</label>
                         <input
                             type="text"
                             id="sName"
+                            value={name}
+                            onChange={handleNameChnage}
                             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                             placeholder="Enter your name"
                         />
+                        {nameError && <p className="text-red-500 text-sm mt-1">{nameError}</p>}
                     </div>
                     <div className="mb-4">
                         <label className="block text-sm font-medium mb-2" htmlFor="sEmail">Email</label>
                         <input
                             type="email"
                             id="sEmail"
+                            value={email}
+                            onChange={handleEmailChnage}
                             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                             placeholder="Enter your email"
                         />
+                        {emailError && <p className="text-red-500 text-sm mt-1">{emailError}</p>}
                     </div>
                     <div className="mb-6">
                         <label className="block text-sm font-medium mb-2" htmlFor="sPassword">Password</label>
                         <input
                             type="password"
                             id="sPassword"
+                            value={password}
+                            onChange={handlepasswordChnage}
                             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                             placeholder="Create a password"
                         />
+                        {passwordError && <p className="text-red-500 text-sm mt-1">{passwordError}</p>}
+                    </div>
+                    <div className="mb-6">
+                        <label className="block text-sm font-medium mb-2" htmlFor="cPassword">Confirm Password</label>
+                        <input
+                            type="password"
+                            id="cPassword"
+                            value={confirmPassword}
+                            onChange={handleConfirmPasswordChnage}
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            placeholder="Create a password"
+                        />
+                        {confirmPasswordError && <p className="text-red-500 text-sm mt-1">{confirmPasswordError}</p>}
                     </div>
                     <button
-                        type="submit"
+                        type="submit"                        
                         className="w-full bg-[#FF9500] text-white py-2 rounded-md hover:bg-[#FF9500] transition duration-200"
                     >
                         Sign Up
