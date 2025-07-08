@@ -6,10 +6,10 @@ import Footer from './Components/Footer/Footer'
 import Home from './Pages/Home/Home'
 import Login from './Pages/Auth/Login/Login'
 import Signup from './Pages/Auth/Signup/Signup'
-import Courses from './Pages/Course/Courses'
+import Courses from './Pages/Course/AllCourses'
 import About from './Pages/About/About'
 import Contact from './Pages/Contact/Contact'
-import CourseDetails from './Pages/Course/CourseDetails'
+import CourseDetails from './Pages/Course/DetailedCourse'
 
 
 function App() {
@@ -23,7 +23,7 @@ function App() {
         <Route path="/course" element={<Courses />} />
         <Route path='/aboutus' element={<About />} />
         <Route path='/contact' element={<Contact />} />
-        <Route path="/coursedetails/:id" element={<CourseDetails />} />
+        <Route path="/coursedetails/:category" element={<CourseDetails />} />
       </Routes>
       <Footer />
     </>

@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import courses from "../../Utils/AllCoursesData";
 
 function Course({courses}) {
   const Navigate = useNavigate();
@@ -15,13 +16,13 @@ function Course({courses}) {
         <span className="px-2 py-1 bg-gray-100 rounded-md text-xs font-medium">
           {courses.level}
         </span>
-        <span className="ml-auto text-right text-xs">Category: {courses.category}</span>
+        <span className="ml-auto text-right text-xs">Category: <span className="text-black font-semibold">{courses.category}</span></span>
       </div>
       <h3 className="mt-3 text-lg font-semibold text-gray-900">{courses.title}</h3>
       <p className="text-gray-600 mt-1 text-sm grow">
         {courses.description}
       </p>
-      <button onClick={() => Navigate(`/coursedetails/${courses.id}`)} className="mt-4 w-full bg-gray-100 hover:bg-amber-500 text-gray-900 font-medium py-2 rounded-lg">
+      <button onClick={() => Navigate(`/coursedetails/${courses.category}`)} className="mt-4 w-full bg-gray-100 hover:bg-amber-500 text-gray-900 font-medium py-2 rounded-lg">
         Get it Now
       </button>
     </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import Course from "../../Components/Courses/Course"
-import CourseData from "../../Utils/CoursesData"
+import CourseData from "../../Utils/AllCoursesData"
 import LogosData from "../../Utils/LogosData"
 import { useNavigate, Link } from "react-router-dom"
 

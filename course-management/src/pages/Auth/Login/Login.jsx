@@ -2,12 +2,36 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [pswdError, setPswdError] = useState("");
-  const [apiError, setApiError] = useState("");
-  const [success, setSuccess] = useState();
+  const [loginForm, setLoginForm] = useState({
+    'email': '',
+    'password': ''
+  })
+
+  function handleInput(e) {
+    const value = e.target.value;
+    const fieldName = e.target.name;
+    setLoginForm(prev => ({
+      ...prev,
+      [fieldName]: value
+    }))
+  }
+
+  function userLogin() {
+    fetch('http://localhost:3000/user/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(loginForm),
+    });
+  }
+
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [emailError, setEmailError] = useState("");
+  // const [pswdError, setPswdError] = useState("");
+  // const [apiError, setApiError] = useState("");
+  // const [success, setSuccess] = useState();
 
   // const isvalidEmail = (value) => {
   //     if(!value.trim()) {
@@ -42,65 +66,65 @@ function Login() {
   //     }
   // }
 
-  const handleEmailChange = (e) => {
-    const value = e.target.value;
-    setEmail(value);
-    setEmailError("");
-  };
+  // const handleEmailChange = (e) => {
+  //   const value = e.target.value;
+  //   setEmail(value);
+  //   setEmailError("");
+  // };
 
-  const handlePswdChange = (e) => {
-    const value = e.target.value;
-    setPassword(value);
-    setPswdError("");
-  };
+  // const handlePswdChange = (e) => {
+  //   const value = e.target.value;
+  //   setPassword(value);
+  //   setPswdError("");
+  // };
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
+  // const handleLogin = async (e) => {
+  //   e.preventDefault();
 
-    //reset prev errors
-    setEmailError("");
-    setPswdError("");
-    setApiError("");
-    setSuccess("");
+  //   //reset prev errors
+  //   setEmailError("");
+  //   setPswdError("");
+  //   setApiError("");
+  //   setSuccess("");
    
-    //Basic Client Validation
-    let isValid = true;
+  //   //Basic Client Validation
+  //   let isValid = true;
 
-    if(!email.trim()) {
-        setEmailError("Email is required");
-        isValid = false;
-    }
+  //   if(!email.trim()) {
+  //       setEmailError("Email is required");
+  //       isValid = false;
+  //   }
 
-    if(!password.trim()) {
-        setPswdError("Password is required");
-        isValid = false;
-    }
+  //   if(!password.trim()) {
+  //       setPswdError("Password is required");
+  //       isValid = false;
+  //   }
 
-    if(!isValid) return; // no need to call API
+  //   if(!isValid) return; // no need to call API
 
-    // Mock API connection
-    try {
-      const response = await fetch("https://reqres.in/api/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", },
-        body: JSON.stringify({ 
-            email: "eve.holt@reqres.in",
-            password: "cityslicka",
-         }),
-      });
+  //   // Mock API connection
+  //   try {
+  //     const response = await fetch("https://reqres.in/api/login", {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json", },
+  //       body: JSON.stringify({ 
+  //           email: "eve.holt@reqres.in",
+  //           password: "cityslicka",
+  //        }),
+  //     });
 
-      const data = await response.json();
+  //     const data = await response.json();
 
-      if (response.ok) {
-        setSuccess("✅ Login successful!");
-        console.log("Token", data.token);
-      } else {
-        setApiError("❌ Login failed: " + data.error);
-      }
-    } catch (err) {
-      setApiError("❌ Network error. Please try again.");
-    }
-  };
+  //     if (response.ok) {
+  //       setSuccess("✅ Login successful!");
+  //       console.log("Token", data.token);
+  //     } else {
+  //       setApiError("❌ Login failed: " + data.error);
+  //     }
+  //   } catch (err) {
+  //     setApiError("❌ Network error. Please try again.");
+  //   }
+  // };
 
   return (
     // Login form
@@ -113,7 +137,7 @@ function Login() {
         <p className="text-xs mb-6 text-center text-gray-600">
           Try with: <span className="font-semibold">eve.holt@reqres.in</span> / <span className="font-semibold">cityslicka</span>
         </p>
-        <form onSubmit={handleLogin}>
+        <form>
           <div className="mb-4">
             <label className="block text-sm font-medium mb-2" htmlFor="email">
               Email
@@ -121,14 +145,12 @@ function Login() {
             <input
               type="email"
               id="email"
-              value={email}
-              onChange={handleEmailChange}
+              name="email"
+              value={loginForm.email}
+              onChange={handleInput}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter your email"
             />
-            {emailError && (
-              <p className="text-sm text-red-500 mt-1">{emailError}</p>
-            )}
           </div>
           <div className="mb-6">
             <label
@@ -140,23 +162,20 @@ function Login() {
             <input
               type="password"
               id="password"
-              value={password}
-              onChange={handlePswdChange}
+              name="password"
+              value={loginForm.password}
+              onChange={handleInput}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter your password"
             />
-            {pswdError && (
-              <p className="text-sm text-red-500 mt-1">{pswdError}</p>
-            )}
           </div>
           <button
-            type="submit"
+            type="button"
+            onClick={userLogin}
             className="w-full bg-[#FF9500] text-white py-2 rounded-md hover:bg-[#FF9500] transition duration-200"
           >
             Login
           </button>
-          {apiError && <p className="text-red-600 text-sm mt-4">{apiError}</p>}
-          {success && <p className="text-green-600 text-sm mt-4">{success}</p>}
         </form>
         <p className="text-xs text-center mt-3">
           Don’t have an account?{" "}
