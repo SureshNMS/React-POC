@@ -1,31 +1,108 @@
-import React, { use, useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import React, { useState } from "react";
+import { FaCheck, FaCheckSquare } from "react-icons/fa";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  useNavigate,
+} from "react-router-dom";
 
 function Signup() {
+  const navigate = useNavigate();
   const [registration, setRegistration] = useState({
     name: "",
+    role: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
+  const [errors, setErrors] = useState({
+    name: "",
+    role: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const [success, setSuccess] = useState("");
+
+  const validator = {
+    name: (val) => (val.trim() ? "" : "Name is Required"),
+    role: (val) => (val.trim() ? "" : "Role is Required"),
+    email: (val) => {
+      if (!val.trim()) return "Email is Required";
+      const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+      return isValid ? "" : "Invalid Email Format";
+    },
+    password: (val) => (val.trim() ? "" : "Password is required"),
+    confirmPassword: (val) => {
+      if (!val.trim()) {
+        return "Confirm Password is Required";
+      } else if (val != registration.password) return "Password doesn't match";
+      else return "";
+    },
+  };
 
   function handleInput(e) {
-    const value = e.target.value;
-    const fieldName = e.target.name;
-    setRegistration((prev) => ({
-      ...prev,
+    const { name: fieldName, value } = e.target;
+
+    const updateRegisterForm = {
+      ...registration,
       [fieldName]: value,
-    }));
+    };
+
+    setRegistration(updateRegisterForm);
+
+    if (validator[fieldName]) {
+      const updateErrorMsg = validator[fieldName](value, updateRegisterForm);
+      setErrors((prev) => ({
+        ...prev,
+        [fieldName]: updateErrorMsg,
+      }));
+    }
   }
 
-  function register() {
-    fetch("http://localhost:3000/user/registration", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(registration),
-    });
+  function register(e) {
+    e.preventDefault();
+
+    const newErrors = {
+      name: validator.name(registration.name),
+      role: validator.role(registration.role),
+      email: validator.email(registration.email),
+      password: validator.password(registration.password),
+      confirmPassword: validator.confirmPassword(
+        registration.confirmPassword,
+        registration
+      ),
+    };
+    setErrors(newErrors);
+
+    const hasErrors = Object.values(newErrors).some((err) => err);
+
+    if (!hasErrors) {
+      fetch("http://localhost:3000/user/registration", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(registration),
+      })
+        .then((res) => res.json())
+        .then(() => {
+          setSuccess(true);
+        });
+
+      setRegistration({
+        name: "",
+        role: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      });
+
+      setTimeout(() => {
+        navigate("/Auth/Login");
+      }, 23563500);
+
+    }
   }
 
   // const [name, setName] = useState("");
@@ -117,10 +194,11 @@ function Signup() {
 
   return (
     // Signup form
-    <div className="flex items-center justify-center mt-10">
-      <div className="bg-white p-8 rounded-lg shadow-md w-96">
+    <div className="flex items-center justify-center mt-6">
+      {!success &&(
+      <div className="bg-white p-6 rounded-lg shadow-md max-w-md w-full">
         <h2 className="text-2xl font-bold text-center">Sign Up</h2>
-        <p className="text-xs mb-6 text-center">
+        <p className="text-xs mb-4 text-center">
           Create an account to get started.
         </p>
         <form>
@@ -137,6 +215,24 @@ function Signup() {
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter your name"
             />
+            {errors.name && <p className="text-red-500">{errors.name}</p>}
+          </div>
+          <div className="mb-4">
+            <label className="block text-sm font-medium mb-2" htmlFor="role">
+              Role
+            </label>
+            <select
+              id="role"
+              name="role"
+              value={registration.role}
+              onChange={handleInput}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="">Select a role</option>
+              <option value="admin">Admin</option>
+              <option value="user">User</option>
+            </select>
+            {errors.role && <p className="text-red-500">{errors.role}</p>}
           </div>
           <div className="mb-4">
             <label className="block text-sm font-medium mb-2" htmlFor="sEmail">
@@ -151,6 +247,7 @@ function Signup() {
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter your email"
             />
+            {errors.email && <p className="text-red-500">{errors.email}</p>}
           </div>
           <div className="mb-6">
             <label
@@ -168,6 +265,9 @@ function Signup() {
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Create a password"
             />
+            {errors.password && (
+              <p className="text-red-500">{errors.password}</p>
+            )}
           </div>
           <div className="mb-6">
             <label
@@ -185,6 +285,9 @@ function Signup() {
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Create a password"
             />
+            {errors.confirmPassword && (
+              <p className="text-red-500">{errors.confirmPassword}</p>
+            )}
           </div>
           <button
             type="button"
@@ -199,8 +302,20 @@ function Signup() {
           <Link to="/auth/login" className="text-[#FF9500]">
             Login
           </Link>
-        </p>
+        </p>        
       </div>
+      )}
+
+      {success && (
+        <div className="bg-white flex justify-center items-center mt-14 mb-2 p-6 rounded-lg shadow-md h-60 max-w-2xl w-full">
+          <p className="text-green-600 text-center mt-4 text-sm">
+            <span className="text-3xl flex flex-wrap items-baseline mb-4"><FaCheck className="text-amber-500 text-2xl mr-1.5" /> Registration Completed Successfully.</span> <span className="text-black">Redirecting to Login Page... If not redirected,</span> {" "}
+            <Link className="text-amber-600" to={"/Auth/Login"}>
+              Click here
+            </Link>
+          </p>
+          </div>
+        )}
     </div>
   );
 }

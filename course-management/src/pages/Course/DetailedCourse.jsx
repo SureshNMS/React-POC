@@ -1,14 +1,25 @@
 // src/components/UIUXCourse.jsx
 import React from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, data } from "react-router-dom";
 import CourseDetailedData from "../../Utils/DetailedCourseData";
 import AllCourseData from "../../Utils/AllCoursesData";
 import { FaArrowLeft, FaBackward } from "react-icons/fa";
+import { useEffect } from "react";
 
 export default function CourseDetails() {
   const { category } = useParams();
   const courseLevel = AllCourseData[5];
   const course = CourseDetailedData.find((section) => section.category === category);
+
+  useEffect(() => {
+    fetch('http://localhost:3000/coursedetails/category/'+category)
+    .then(data => {
+      return data.json();
+    })
+    .then(data => {
+      console.log("Category Course", data)
+    })
+  })
 
   if (!course) {
     return <div className="text-black p-6">This "{category}" category data not found</div>;

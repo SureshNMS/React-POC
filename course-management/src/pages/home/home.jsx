@@ -1,11 +1,20 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Course from "../../Components/Courses/Course"
 import CourseData from "../../Utils/AllCoursesData"
 import LogosData from "../../Utils/LogosData"
-import { useNavigate, Link } from "react-router-dom"
+import { useNavigate, Link, data } from "react-router-dom"
 
 function Home() {
   const navigate = useNavigate();
+  useEffect(() => {
+    fetch('http://localhost:3000/course/allcourses')
+    .then(data => {
+      return data.json()
+    })
+    .then(data => {
+      console.log("All courses from server:", data);
+    });
+  })
   return (
     <>
       <div className="container">

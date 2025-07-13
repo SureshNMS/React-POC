@@ -1,8 +1,19 @@
 import React from "react";
 import Courses from "../../Components/Courses/Course";
 import CourseData from "../../Utils/AllCoursesData";
+import { useEffect } from "react";
+import { data } from "react-router-dom";
 
 function Course() {
+  useEffect(() => {
+    fetch('http://localhost:3000/course/allcourses')
+    .then(data => {
+      return data.json();
+    })
+    .then(data => {
+      console.log("All courses received", data);
+    })
+  })
   return (
     <>
       <section className="container px-4 py-12">
@@ -23,7 +34,7 @@ function Course() {
       
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
         {CourseData.map((course) => (
-          <Courses key={course.category} courses={course} />
+          <Courses key={course.id} courses={course} />
         ))}
       </div>
       </section>

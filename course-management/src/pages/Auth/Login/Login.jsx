@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Login() {
-  const [loginForm, setLoginForm] = useState({
-    'email': '',
-    'password': ''
-  })
+  const navigate = useNavigate();
+  const [loginForm, setLoginForm] = useState({ 'email': '', 'password': '' })
+  const [errors, setErrors] = useState({ 'email': '', 'password': '' })
+  const [successMessage, setSuccessMessage] = useState("");
 
   function handleInput(e) {
     const value = e.target.value;
@@ -14,16 +14,54 @@ function Login() {
       ...prev,
       [fieldName]: value
     }))
+    setErrors(prev => ({
+      ...prev,
+      [fieldName]:""
+    }))
+    setSuccessMessage("");
   }
 
-  function userLogin() {
-    fetch('http://localhost:3000/user/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(loginForm),
-    });
+  function userLogin(e) {
+    e.preventDefault();
+
+    const newErrors = {
+      email: loginForm.email.trim() ? "" : "Email id Required",
+      password: loginForm.password.trim() ? "" : "Password is required"
+    }
+
+    setErrors(newErrors);
+
+    const hasErrors = Object.values(newErrors).some((errors) => errors);
+
+    if(!hasErrors) {
+      fetch('http://localhost:3000/user/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(loginForm),
+        })
+        .then(async (res) => {
+          const data = await res.json();
+
+          if(!res.ok) {
+            setErrors({email: "", password: data.message || "Email or Password is incorrect"});
+            return;
+          }
+
+          setSuccessMessage("Login successful! Redirecting...");
+          setErrors({ email: "", password: "" });
+
+          localStorage.setItem("isLoggedIn", "true");
+          setTimeout(() => {
+            //window.location.href = "/";
+            navigate("/")
+          }, 1500);
+        })
+        .catch (() => {
+          setErrors("Network error. Please try again.");
+        })
+    }
   }
 
   // const [email, setEmail] = useState("");
@@ -132,12 +170,9 @@ function Login() {
       <div className="bg-white p-8 rounded-lg shadow-md w-96">
         <h2 className="text-2xl font-bold text-center">Login</h2>
         <p className="text-xs mb-6 text-center">
-          Welcome back! Please log in to access your account.
+          Welcome back! Please use your credentials to access your account.
         </p>
-        <p className="text-xs mb-6 text-center text-gray-600">
-          Try with: <span className="font-semibold">eve.holt@reqres.in</span> / <span className="font-semibold">cityslicka</span>
-        </p>
-        <form>
+        <form onSubmit={userLogin}>
           <div className="mb-4">
             <label className="block text-sm font-medium mb-2" htmlFor="email">
               Email
@@ -151,6 +186,7 @@ function Login() {
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter your email"
             />
+            {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
           </div>
           <div className="mb-6">
             <label
@@ -168,10 +204,10 @@ function Login() {
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter your password"
             />
+            {errors.password && <p className="text-red-500 text-sm mt-2">{errors.password}</p>}
           </div>
           <button
-            type="button"
-            onClick={userLogin}
+            type="submit"            
             className="w-full bg-[#FF9500] text-white py-2 rounded-md hover:bg-[#FF9500] transition duration-200"
           >
             Login
@@ -183,6 +219,7 @@ function Login() {
             Sign Up
           </Link>
         </p>
+        {successMessage && <p className="text-green-500 text-sm text-center mb-2 mt-2">{successMessage}</p>}
       </div>
     </div>
   );

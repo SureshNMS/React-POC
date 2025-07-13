@@ -1,7 +1,7 @@
 import React from "react";
 import Logo from '../../assets/course-management-logo-dark.png'; // Adjust the path as necessary
 
-const Footer = () => {
+function Footer() {
   return (
     <footer className="bg-white py-10 border-t border-gray-200 mt-20">
       <div className="px-4 grid grid-cols-1 md:grid-cols-4 gap-8 text-sm text-gray-700 container">
@@ -66,7 +66,7 @@ const Footer = () => {
 
       {/* Footer Bottom */}
       <div className="mt-10 text-center text-sm text-gray-500">
-        © 2025 Course Management. All rights reserved.
+        © 2025 Course Management. Developed by Suresh.
       </div>
     </footer>
   );
